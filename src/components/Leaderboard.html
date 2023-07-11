@@ -1,0 +1,32 @@
+<div class="container">
+  <div id="reference">
+    Design from <a href="https://www.uidesigndaily.com/posts/xd-leaderboard-list-day-1369">UI design daily</a>
+  </div>
+  <div class="frame">
+    <header>Leaderboard</header>
+    <div class="button-group" data-left="4px">
+      <button onclick="buttonClick('4px')">Last 30 days</button>
+      <button onclick="buttonClick('50%')">All time</button>
+    </div>
+    <div class="score-card">
+      {{#each scoreBoard}}
+        <div class="leader">
+          <div class="user">
+            <div class="number">{{@index}}</div>
+            <div class="user-pic"></div>
+          </div>
+          <div class="user-info">
+            <div class="user-name">{{name}}</div>
+            <div class="view-count">{{viewCount}}</div>
+          </div>
+          <div class="gallery">
+            {{#each [1,2,3]}}
+              <div class="gallery-item"></div>
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <button class="cta-primary">View everyone</button>
+  </div>
+</div>
