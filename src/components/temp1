@@ -1,0 +1,125 @@
+// Step 1: Create a new directory called components inside the src directory.
+
+// Step 2: Inside the components directory, create a new file called Leaderboard.js.
+import React, { useEffect, useState } from 'react';
+import { fetchAttendeesPoints } from '../api';
+import './Leaderboard.css'; // Import the CSS file
+
+const Leaderboard = () => {
+  // Step 3: Set up the basic structure of the Leaderboard functional component in Leaderboard.js.
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
+  useEffect(() => {
+    const limit = 10; // Optional: Set the limit for the number of profiles to be returned
+
+    // Step 4: Call the fetchAttendeesPoints function to fetch the leaderboard data.
+    fetchAttendeesPoints(limit)
+      .then(data => {
+        if (data !== null) {
+          // Step 5: Process the leaderboard data by updating the component state.
+          setLeaderboardData(data);
+        } else {
+          console.log('Failed to fetch leaderboard data');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle error gracefully
+      });
+  }, []);
+
+  // Step 6: Design the UI for the leaderboard by creating the necessary HTML/JSX structure.
+  return (
+    <div className="leaderboard-container">
+  <h2 className="leaderboard-title">Leaderboard</h2>
+  <ul className="player-list">
+    {leaderboardData.map((player, index) => (
+      <li className="player-item" key={index}>
+        <span>{player.discord}</span> - Score: <span>{player.points}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+  );
+};
+
+// Step 7: Export the Leaderboard component as the default export.
+export default Leaderboard;
+export { fetchAttendeesPoints };
+
+
+
+
+
+CSS
+/* Leaderboard.css */
+
+/* Styles for the leaderboard container */
+.leaderboard-container {
+    background-color: #2237ac;
+    padding: 20px;
+  }
+  
+  /* Styles for the leaderboard title */
+  .leaderboard-title {
+    color: #080101;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styles for the player list */
+  .player-list {
+    list-style-type: none;
+  }
+  
+  /* Styles for each player item */
+  .player-item {
+    margin-bottom: 10px;
+  }
+  
+
+
+
+
+  js 2
+  <div className="score-card">
+  {/* JSX code for the card frame */}
+  <ul role="list" className="grid">
+    <li>
+      <article className="card" data-visible="false">
+        <div className="card__front flow-content">
+          <img className="card__img mx-auto" src="/img/radiant-gradient.png" />
+          <div className="flow-content" data-spacing="sm">
+            <p className="card__name">Mark Curry</p>
+            <p className="card__position">Software Engineer</p>
+          </div>
+        </div>
+        <div className="card__back flow-content">
+          <p className="card__name">Mark Curry</p>
+          <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et dictum sem.</q>
+          <ul role="list" className="card__social flex-group">
+            <li>
+              <a href="#">
+                <i className="fa-brands fa-twitter "></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fa-brands fa-linkedin "></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <footer className="card__footer">
+          <button data-card-controller className="card__toggle">
+            <i className="fa-solid fa-plus card__toggle-icon"></i>
+          </button>
+        </footer>
+      </article>
+    </li>
+    <li>
+      {/* Repeat the above structure for other card items */}
+    </li>
+  </ul>
+</div>
